@@ -16,7 +16,7 @@ function useCurrencyInfo(currency){
         fetch(`https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${currency}.json`)
         .then((res) => res.json()) // 'res' is automatically provided as the result of the resolved promise
         .then((res) => setData(res[currency])) // we can access objects through []
-    },[currency, data])
+    },[currency])
     console.log(data)
     return data;
 }

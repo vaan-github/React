@@ -1,4 +1,8 @@
-import React from "react"
+// The below code has some error in currency option section.
+// I fixed the error.
+// must see the error is unique.
+
+import useId from "react"
 
 function InputBox({
     // These are props
@@ -12,16 +16,19 @@ function InputBox({
     currencyDisable = false,
     className = "",
 }) {
-   
+    // Dont call useId to generate keys in a list. Keys should be generated from your data.
+
+   const amountInputId = useId // give unique sticker to the same fruit like 2 apple has different sticker.
 
     return (
         <div className={`bg-white p-3 rounded-lg text-sm flex ${className}`}>
             <div className="w-1/2">
-                <label  className="text-black/40 mb-2 inline-block">
+                <label  htmlFor={amountInputId} className="text-black/40 mb-2 inline-block">
                     {label}
                 </label>
                 <input
-                    
+                    // binding the label useId with input.
+                    id={amountInputId}
                     className="outline-none w-full bg-transparent py-1.5"
                     type="number"
                     placeholder="Amount"
@@ -43,16 +50,28 @@ function InputBox({
                     disabled = {currencyDisable}
                 >
                 {/* Remeber the keys in loop in react because it will enhance the performance. */
+                    // This peace of code works the same as below but implicitly return when we use ()
                     
+                    // currencyOptions.map((currency)=>(
+                    //     <option key={currency} value={currency}>
+                    //        {currency}
+                    //     </option>
+                    // ))
+                    
+                    
+                    // by using curly braces I got the option not showing error.
+                    // but i solved the error by returning the value.
+
                     currencyOptions.map((currency)=>{
+                        return(
                         <option key={currency} value={currency}>
                            {currency}
                         </option>
+                        )
                     })
                     
                 }
                         
-                
                 </select>
             </div>
         </div>
